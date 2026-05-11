@@ -1,98 +1,587 @@
-import { Project, Article, ExperienceItem } from '../types';
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tactical Intelligence Portfolio | Operational Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#0F172A',
+                        'slate-deep': '#1E293B',
+                        'slate-border': '#334155',
+                        'off-white': '#F8FAFC',
+                        'slate-muted': '#94A3B8',
+                        'tactical-blue': '#3B82F6',
+                        'alert-amber': '#F59E0B',
+                    },
+                    fontFamily: {
+                        sans: ['"Crimson Pro"', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0F172A;
+            color: #F8FAFC;
+            font-family: "Crimson Pro", serif;
+        }
+        .mono {
+            font-family: "JetBrains Mono", monospace;
+        }
+        .scanning-line {
+            background: linear-gradient(to bottom, transparent, #3B82F6, transparent);
+            height: 100px;
+            width: 100%;
+            position: absolute;
+            top: -100px;
+            animation: scan 3s linear infinite;
+            opacity: 0.1;
+        }
+        @keyframes scan {
+            0% { top: -100px; }
+            100% { top: 100%; }
+        }
+        .glitch-hover:hover {
+            text-shadow: 2px 0 #3B82F6, -2px 0 #F59E0B;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F172A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3B82F6;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Tactical Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 mix-blend-difference">
+        <nav class="max-w-[1800px] mx-auto px-10 py-10 flex justify-between items-center bg-midnight border-b border-slate-border/20">
+            <div class="flex items-center gap-12">
+                <a href="#" class="text-2xl font-black tracking-tighter uppercase italic text-off-white hover:text-tactical-blue transition-colors">
+                    D. <span class="opacity-50 group-hover:opacity-100 transition-opacity">Paliwal</span>
+                </a>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-16">
+                <a href="#about" class="text-[10px] mono text-slate-muted hover:text-tactical-blue transition-colors uppercase tracking-[0.4em] font-bold">Protocol</a>
+                <a href="#portfolio" class="text-[10px] mono text-slate-muted hover:text-tactical-blue transition-colors uppercase tracking-[0.4em] font-bold">Portfolio</a>
+                <a href="#articles" class="text-[10px] mono text-slate-muted hover:text-tactical-blue transition-colors uppercase tracking-[0.4em] font-bold">Intelligence</a>
+            </div>
 
-export const PROJECTS: Project[] = [
-  {
-    id: 'israel-me-forecast',
-    title: 'Strategic Intelligence Forecast: Israel-Middle East Crisis',
-    summary: 'Developed a 6-month strategic forecast analyzing the US-Iran ceasefire and leadership transition. The brief identifies compounding corporate risks including energy supply shocks, maritime logistics paralysis, and expanded cyber-attack surfaces.',
-    tools: 'Intelligence Forecasting, Divergent Scenario Planning (65% Base Case / 30% Worst Case), Threat Vector Analysis',
-    outcome: 'Produced actionable business continuity protocols covering personnel security, SWIFT system hardening, and global supply chain rerouting.',
-    tags: ['Middle East', 'Risk Forecast', 'Logistics'],
-    image: 'images/middle-east.jpg',
-    content: 'Full case study documentation...',
-    date: 'Dec 2024',
-    pdfUrl: 'https://example.com/middle-east-forecast.pdf'
-  },
-  {
-    id: 'baltic-maritime',
-    title: 'Russian Hybrid Threats to Baltic Maritime Infrastructure',
-    summary: 'A comprehensive risk assessment evaluating non-kinetic threats targeting undersea communications and energy assets. Built a structured dataset of 15+ incidents.',
-    tools: 'PMESII Framework, OSINT, Data Structuring',
-    outcome: 'Mapped specific vulnerabilities within maritime infrastructure to isolate potential operational disruptions.',
-    tags: ['Baltic Sea', 'Hybrid Threat', 'OSINT'],
-    image: 'images/baltic.jpg',
-    content: 'Full case study documentation...',
-    date: 'Oct 2024',
-    pdfUrl: 'https://example.com/baltic-maritime-report.pdf'
-  },
-  {
-    id: 'bangladesh-supply-chain',
-    title: 'Bangladesh Political Transition & Supply Chain Tripwires',
-    summary: 'A tactical assessment mapping localized unrest and security implications following political volatility.',
-    tools: 'OSINT, SOCMINT, ICD-203 Standards, Threat Modeling',
-    outcome: 'Established early-warning tripwires for operational continuity and infrastructure monitoring.',
-    tags: ['Supply Chain', 'Crisis Monitoring', 'Geopolitics'],
-    image: 'images/bangladesh.jpg',
-    content: 'Full case study documentation...',
-    date: 'Aug 2024',
-    pdfUrl: 'https://example.com/bangladesh-supply-chain.pdf'
-  },
-  {
-    id: 'myanmar-conflict',
-    title: 'Myanmar Conflict Trajectory & Corporate Exposure',
-    summary: 'A tactical assessment designed to evaluate supply chain vulnerabilities and physical security risks amid regional instability. Focused on organizing fragmented, multi-source data into a cohesive threat model.',
-    tools: 'Incident Classification Schemas, SOCMINT, Corporate Threat Modeling',
-    outcome: 'Developed a structured dataset of regional incidents, applying a rigorous classification schema to isolate actionable early-warning signals for operational security.',
-    tags: ['Myanmar', 'Conflict Analysis', 'Threat Modeling'],
-    image: 'images/myanmar.jpg',
-    content: 'Full case study documentation...',
-    date: 'Jun 2024',
-    pdfUrl: 'https://example.com/myanmar-conflict.pdf'
-  }
-];
+            <div class="flex items-center gap-8">
+                <div class="flex flex-col items-end mono">
+                    <span class="text-[10px] text-tactical-blue font-bold tracking-widest uppercase">System Ready</span>
+                    <span id="zulu-clock" class="text-[10px] text-slate-muted uppercase tracking-widest">00:00:00 ZULU</span>
+                </div>
+                <a href="mailto:daksh.paliwal0910@gmail.com" class="p-3 bg-off-white text-midnight hover:bg-tactical-blue hover:text-off-white transition-all rounded-[2px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </a>
+            </div>
+        </nav>
+    </header>
 
-export const ARTICLES: Article[] = [
-  {
-    id: 'placeholder-1',
-    title: 'Article Placeholder Title 1',
-    summary: 'Analytical article content is currently being prepared and will be deployed soon. Check back for updates.',
-    category: 'Analysis',
-    readTime: '8 min read',
-    date: 'TBD',
-    tags: ['Signal Detection', 'Civil Unrest'],
-    content: `Analytical article content is currently being prepared.`
-  },
-  {
-    id: 'placeholder-2',
-    title: 'Article Placeholder Title 2',
-    summary: 'Analytical article content is currently being prepared and will be deployed soon. Check back for updates.',
-    category: 'Methodology',
-    readTime: '10 min read',
-    date: 'TBD',
-    tags: ['OSINT', 'Data Strategy'],
-    content: `Analytical article content is currently being prepared.`
-  }
-];
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-screen pt-48 pb-32 px-10 relative flex flex-col justify-center overflow-hidden">
+            <div class="scanning-line"></div>
+            
+            <div class="max-w-[1800px] mx-auto w-full relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-20 items-end">
+                    <div>
+                        <div class="flex items-center gap-4 mb-10">
+                            <div class="w-12 h-px bg-tactical-blue"></div>
+                            <span class="mono text-[10px] text-tactical-blue uppercase tracking-[0.5em] font-bold">Operational Status: ACTIVE</span>
+                        </div>
+                        
+                        <h1 class="text-[clamp(60px,12vw,180px)] font-black leading-[0.85] tracking-tighter uppercase italic text-off-white mb-16">
+                            Tactical <br/>
+                            In<span class="text-tactical-blue opacity-80">tell</span>igence <br/>
+                            Analyst.
+                        </h1>
 
-export const EXPERIENCE: ExperienceItem[] = [
-  {
-    role: "Strategic Risk Consultant",
-    company: "Global Intel Solutions",
-    period: "2022 - Present",
-    description: [
-      "Led cross-functional teams in developing real-time crisis monitoring dashboards.",
-      "Integrated OSINT workflows into executive decision-making frameworks.",
-      "Conducted on-ground risk assessments in high-volatility environments."
-    ]
-  },
-  {
-    role: "Product Strategist (Threat Data)",
-    company: "SecureNet Systems",
-    period: "2020 - 2022",
-    description: [
-      "Designed the PMESII-based tagging engine for automated threat detection.",
-      "Reduced signal-to-noise ratio by 40% through targeted analytical refining.",
-      "Managed product lifecycle for tactical monitoring tools."
-    ]
-  }
-];
+                        <div class="flex flex-wrap gap-12 border-t border-slate-border/20 pt-16">
+                            <div class="flex flex-col">
+                                <span class="mono text-[9px] text-slate-muted uppercase tracking-[0.3em] mb-4">Location Matrix</span>
+                                <span class="text-2xl font-bold italic">28.6139° N, 77.2090° E</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="mono text-[9px] text-slate-muted uppercase tracking-[0.3em] mb-4">Focus Sector</span>
+                                <span class="text-2xl font-bold italic">Geopolitics // OSINT</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="mono text-[9px] text-slate-muted uppercase tracking-[0.3em] mb-4">Tradecraft Status</span>
+                                <span class="text-2xl font-bold italic">ICD-203 Validated</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hidden lg:block">
+                        <div class="aspect-[3/4] bg-slate-deep/20 border border-slate-border/30 p-8 flex flex-col relative group">
+                            <div class="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-tactical-blue opacity-30 group-hover:opacity-100 transition-opacity"></div>
+                            <div class="mono text-[9px] text-slate-muted mb-auto uppercase tracking-widest leading-relaxed">
+                                [SYSTEM_LOG] Initializing secure handshake... <br/>
+                                [SYSTEM_LOG] Loading regional dossiers... <br/>
+                                [SYSTEM_LOG] Signal strength: OPTIMAL <br/>
+                                [SYSTEM_LOG] Encryption: ACTIVE
+                            </div>
+                            <div class="mt-8 border-t border-slate-border/20 pt-8">
+                                <p class="text-slate-muted text-lg italic leading-relaxed mb-8">
+                                    "Synthesizing fragmented geopolitical signals into high-fidelity strategic assessments for high-stakes decision making."
+                                </p>
+                                <div class="flex justify-between items-center">
+                                    <span class="mono text-[10px] text-tactical-blue tracking-[0.3em] font-bold animate-pulse">MONITORING...</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-tactical-blue"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-48 px-10 bg-slate-deep/10 border-t border-slate-border/10 relative">
+            <div class="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-start">
+                <div>
+                    <div class="flex items-center gap-4 mb-10">
+                        <div class="w-12 h-px bg-tactical-blue"></div>
+                        <span class="mono text-[10px] text-tactical-blue uppercase tracking-[0.4em] font-bold">Protocol: PERS-INT</span>
+                    </div>
+                    <h2 class="text-[60px] md:text-[90px] font-black tracking-tighter text-off-white uppercase italic leading-[0.9] mb-12">
+                        Translating Signal <br/> Into <span class="text-tactical-blue opacity-80">Strategy.</span>
+                    </h2>
+                    <div class="grid grid-cols-3 gap-12 pt-16 border-t border-slate-border/20">
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-bold text-off-white mb-2 italic">100%</span>
+                            <span class="mono text-[9px] text-slate-muted uppercase tracking-widest">Signal Integrity</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-bold text-off-white mb-2 italic">ICD-203</span>
+                            <span class="mono text-[9px] text-slate-muted uppercase tracking-widest">Tradecraft Standard</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-bold text-off-white mb-2 italic">OSINT</span>
+                            <span class="mono text-[9px] text-slate-muted uppercase tracking-widest">Deployment Matrix</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-24">
+                    <div class="relative pl-12 border-l border-slate-border/30">
+                        <div class="absolute top-0 left-0 w-1 h-12 bg-tactical-blue"></div>
+                        <h4 class="text-[24px] font-black text-off-white mb-8 uppercase italic tracking-tight">Background & Domain Transition</h4>
+                        <p class="text-slate-muted leading-relaxed text-xl italic font-serif max-w-2xl">
+                            With a foundational background in business administration and tech-focused project execution, I have transitioned my focus entirely toward geopolitical risk and intelligence collection. I blend academic rigor with tactical data collection to bridge the gap between abstract risk and operational reality.
+                        </p>
+                    </div>
+
+                    <div class="relative pl-12 border-l border-slate-border/30">
+                        <h4 class="text-[24px] font-black text-off-white mb-8 uppercase italic tracking-tight">The Analytical Mandate</h4>
+                        <p class="text-slate-muted leading-relaxed text-xl max-w-2xl">
+                            I operate as a detail-oriented researcher dedicated to OSINT and SOCMINT. I build structured datasets to monitor political volatility and regional stability, adhering to PMESII and ICD-203 tradecraft standards. My work centers on creating repeatable, scalable methodologies for monitoring high-volatility environments.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-48 px-10 relative bg-midnight overflow-hidden">
+            <div class="max-w-[1800px] mx-auto mb-24">
+                <div class="flex items-center gap-10 mb-6">
+                    <div class="w-12 h-12 bg-tactical-blue/10 border border-tactical-blue/30 flex items-center justify-center rounded-[2px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tactical-blue"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+                    </div>
+                    <h2 class="text-[80px] font-black tracking-tighter text-off-white uppercase italic leading-none">Operational Portfolio</h2>
+                    <div class="h-px bg-slate-border/30 flex-grow"></div>
+                </div>
+                <div class="flex items-center gap-6 pl-24">
+                    <div class="h-px w-10 bg-tactical-blue/50"></div>
+                    <p class="mono text-[11px] text-slate-muted uppercase tracking-[0.4em] font-bold">Assessment Repository & Strategic Intelligence Archive</p>
+                </div>
+            </div>
+
+            <div class="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-border/20 border border-slate-border/20 rounded-sm overflow-hidden shadow-2xl">
+                <!-- Project 1: Middle East -->
+                <div class="group relative bg-midnight hover:bg-slate-deep/40 transition-all duration-500 flex flex-col p-16">
+                    <div class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none grayscale overflow-hidden">
+                        <img src="images/middle-east.jpg" alt="" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="flex justify-between items-start mb-16 relative z-10">
+                        <div class="flex flex-col">
+                            <div class="flex items-center gap-3 mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tactical-blue"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+                                <span class="mono text-[10px] text-tactical-blue uppercase tracking-[0.3em] font-bold">Dossier: ME-101</span>
+                            </div>
+                            <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.2em]">Dec 2024 // Strategic Forecast</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-border group-hover:text-tactical-blue transition-colors"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h6z"/></svg>
+                    </div>
+
+                    <div class="relative z-10">
+                        <h3 class="text-[48px] font-black text-off-white italic mb-12 group-hover:text-tactical-blue transition-colors tracking-tighter leading-none uppercase max-w-lg">
+                            Israel-Middle East Crisis Forecast
+                        </h3>
+                        
+                        <div class="space-y-8 mb-16">
+                            <div class="grid grid-cols-[120px_1fr] gap-10">
+                                <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.3em] pt-1">Objectives:</span>
+                                <p class="text-slate-muted text-lg italic leading-relaxed border-l border-slate-border/30 pl-8 font-serif">
+                                    Developed a 6-month strategic forecast analyzing the US-Iran ceasefire and leadership transition. identifies energy shocks and maritime logistics paralysis.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-[120px_1fr] gap-10 pt-8 border-t border-slate-border/10">
+                                <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.3em] pt-1">Tools:</span>
+                                <p class="text-off-white/80 mono text-xs leading-relaxed tracking-wider">
+                                    Forecasting, Divergent Scenario Planning (65% Base / 30% Worst), Threat Vector Analysis
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-12 border-t border-slate-border/20">
+                            <div class="flex gap-4">
+                                <span class="px-3 py-1 border border-slate-border/50 mono text-[9px] text-slate-muted uppercase tracking-widest">Risk Forecast</span>
+                                <span class="px-3 py-1 border border-slate-border/50 mono text-[9px] text-slate-muted uppercase tracking-widest">Middle East</span>
+                            </div>
+                            <a href="https://example.com/middle-east-forecast.pdf" target="_blank" class="flex items-center gap-4 mono text-[11px] font-bold uppercase tracking-[0.2em] text-off-white group-hover:text-tactical-blue transition-all">
+                                EXAMINE ASSESSMENT (PDF)
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-[1px] bg-slate-border/20">
+                        <div class="absolute h-full bg-tactical-blue w-0 group-hover:w-full transition-all duration-700"></div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Baltic -->
+                <div class="group relative bg-midnight hover:bg-slate-deep/40 transition-all duration-500 flex flex-col p-16">
+                    <div class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none grayscale overflow-hidden">
+                        <img src="images/baltic.jpg" alt="" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="flex justify-between items-start mb-16 relative z-10">
+                        <div class="flex flex-col">
+                            <div class="flex items-center gap-3 mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tactical-blue"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+                                <span class="mono text-[10px] text-tactical-blue uppercase tracking-[0.3em] font-bold">Dossier: BA-202</span>
+                            </div>
+                            <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.2em]">Oct 2024 // Hybrid Threat Assessment</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-border group-hover:text-tactical-blue transition-colors"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h6z"/></svg>
+                    </div>
+
+                    <div class="relative z-10">
+                        <h3 class="text-[48px] font-black text-off-white italic mb-12 group-hover:text-tactical-blue transition-colors tracking-tighter leading-none uppercase max-w-lg">
+                            Baltic Maritime Hybrid Threat Analysis
+                        </h3>
+                        
+                        <div class="space-y-8 mb-16">
+                            <div class="grid grid-cols-[120px_1fr] gap-10">
+                                <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.3em] pt-1">Objectives:</span>
+                                <p class="text-slate-muted text-lg italic leading-relaxed border-l border-slate-border/30 pl-8 font-serif">
+                                    Comprehensive risk assessment evaluating non-kinetic threats targeting undersea communications and energy assets. Built a structured dataset of 15+ incidents.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-[120px_1fr] gap-10 pt-8 border-t border-slate-border/10">
+                                <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.3em] pt-1">Tools:</span>
+                                <p class="text-off-white/80 mono text-xs leading-relaxed tracking-wider">
+                                    PMESII Framework, OSINT Collection, Structured Data Mapping
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-12 border-t border-slate-border/20">
+                            <div class="flex gap-4">
+                                <span class="px-3 py-1 border border-slate-border/50 mono text-[9px] text-slate-muted uppercase tracking-widest">OSINT</span>
+                                <span class="px-3 py-1 border border-slate-border/50 mono text-[9px] text-slate-muted uppercase tracking-widest">Baltic Sea</span>
+                            </div>
+                            <a href="https://example.com/baltic-maritime-report.pdf" target="_blank" class="flex items-center gap-4 mono text-[11px] font-bold uppercase tracking-[0.2em] text-off-white group-hover:text-tactical-blue transition-all">
+                                EXAMINE ASSESSMENT (PDF)
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-[1px] bg-slate-border/20">
+                        <div class="absolute h-full bg-tactical-blue w-0 group-hover:w-full transition-all duration-700"></div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Bangladesh -->
+                <div class="group relative bg-midnight hover:bg-slate-deep/40 transition-all duration-500 flex flex-col p-16">
+                    <div class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none grayscale overflow-hidden">
+                        <img src="images/bangladesh.jpg" alt="" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="flex justify-between items-start mb-16 relative z-10">
+                        <div class="flex flex-col">
+                            <div class="flex items-center gap-3 mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tactical-blue"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+                                <span class="mono text-[10px] text-tactical-blue uppercase tracking-[0.3em] font-bold">Dossier: BG-303</span>
+                            </div>
+                            <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.2em]">Aug 2024 // Crisis Monitoring</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-border group-hover:text-tactical-blue transition-colors"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h6z"/></svg>
+                    </div>
+
+                    <div class="relative z-10">
+                        <h3 class="text-[48px] font-black text-off-white italic mb-12 group-hover:text-tactical-blue transition-colors tracking-tighter leading-none uppercase max-w-lg">
+                            Bangladesh Political Transition Tripwires
+                        </h3>
+                        
+                        <div class="space-y-8 mb-16">
+                            <div class="grid grid-cols-[120px_1fr] gap-10">
+                                <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.3em] pt-1">Objectives:</span>
+                                <p class="text-slate-muted text-lg italic leading-relaxed border-l border-slate-border/30 pl-8 font-serif">
+                                    Tactical assessment mapping localized unrest and security implications following political volatility. Establishing early-warning indicators for continuity.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-[120px_1fr] gap-10 pt-8 border-t border-slate-border/10">
+                                <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.3em] pt-1">Tools:</span>
+                                <p class="text-off-white/80 mono text-xs leading-relaxed tracking-wider">
+                                    SOCMINT Monitoring, ICD-203 Standards, Threat Modeling
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-12 border-t border-slate-border/20">
+                            <div class="flex gap-4">
+                                <span class="px-3 py-1 border border-slate-border/50 mono text-[9px] text-slate-muted uppercase tracking-widest">Supply Chain</span>
+                                <span class="px-3 py-1 border border-slate-border/50 mono text-[9px] text-slate-muted uppercase tracking-widest">Crisis Monitoring</span>
+                            </div>
+                            <a href="https://example.com/bangladesh-supply-chain.pdf" target="_blank" class="flex items-center gap-4 mono text-[11px] font-bold uppercase tracking-[0.2em] text-off-white group-hover:text-tactical-blue transition-all">
+                                EXAMINE ASSESSMENT (PDF)
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-[1px] bg-slate-border/20">
+                        <div class="absolute h-full bg-tactical-blue w-0 group-hover:w-full transition-all duration-700"></div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Myanmar -->
+                <div class="group relative bg-midnight hover:bg-slate-deep/40 transition-all duration-500 flex flex-col p-16">
+                    <div class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none grayscale overflow-hidden">
+                        <img src="images/myanmar.jpg" alt="" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="flex justify-between items-start mb-16 relative z-10">
+                        <div class="flex flex-col">
+                            <div class="flex items-center gap-3 mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tactical-blue"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+                                <span class="mono text-[10px] text-tactical-blue uppercase tracking-[0.3em] font-bold">Dossier: MY-404</span>
+                            </div>
+                            <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.2em]">Jun 2024 // Conflict Analysis</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-border group-hover:text-tactical-blue transition-colors"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h6z"/></svg>
+                    </div>
+
+                    <div class="relative z-10">
+                        <h3 class="text-[48px] font-black text-off-white italic mb-12 group-hover:text-tactical-blue transition-colors tracking-tighter leading-none uppercase max-w-lg">
+                            Myanmar Conflict Trajectory Analysis
+                        </h3>
+                        
+                        <div class="space-y-8 mb-16">
+                            <div class="grid grid-cols-[120px_1fr] gap-10">
+                                <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.3em] pt-1">Objectives:</span>
+                                <p class="text-slate-muted text-lg italic leading-relaxed border-l border-slate-border/30 pl-8 font-serif">
+                                    Tactical assessment designed to evaluate supply chain vulnerabilities amid regional instability. organizing fragmented, multi-source data into threat model.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-[120px_1fr] gap-10 pt-8 border-t border-slate-border/10">
+                                <span class="mono text-[10px] text-slate-muted uppercase tracking-[0.3em] pt-1">Tools:</span>
+                                <p class="text-off-white/80 mono text-xs leading-relaxed tracking-wider">
+                                    Incident Classification Schemas, SOCMINT, Corporate Threat Modeling
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-12 border-t border-slate-border/20">
+                            <div class="flex gap-4">
+                                <span class="px-3 py-1 border border-slate-border/50 mono text-[9px] text-slate-muted uppercase tracking-widest">Conflict Analysis</span>
+                                <span class="px-3 py-1 border border-slate-border/50 mono text-[9px] text-slate-muted uppercase tracking-widest">Myanmar</span>
+                            </div>
+                            <a href="https://example.com/myanmar-conflict.pdf" target="_blank" class="flex items-center gap-4 mono text-[11px] font-bold uppercase tracking-[0.2em] text-off-white group-hover:text-tactical-blue transition-all">
+                                EXAMINE ASSESSMENT (PDF)
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-[1px] bg-slate-border/20">
+                        <div class="absolute h-full bg-tactical-blue w-0 group-hover:w-full transition-all duration-700"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Section -->
+        <section id="articles" class="py-48 px-10 bg-midnight relative">
+            <div class="max-w-[1800px] mx-auto mb-24">
+                <div class="flex items-center gap-10 mb-6">
+                    <h2 class="text-[80px] font-black tracking-tighter text-off-white uppercase italic leading-none">Intelligence Briefs</h2>
+                    <div class="h-px bg-slate-border/30 flex-grow"></div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="h-px w-10 bg-tactical-blue/50"></div>
+                    <p class="mono text-[11px] text-slate-muted uppercase tracking-[0.4em] font-bold">NON-CLASSIFIED STRATEGIC ASSESSMENTS & RAPID RESPONSE REPORTS</p>
+                </div>
+            </div>
+
+            <div class="max-w-[1800px] mx-auto border border-slate-border/20 rounded-sm overflow-hidden bg-midnight shadow-2xl">
+                <div class="hidden lg:grid grid-cols-[160px_1fr_200px_160px_100px] gap-12 px-12 py-8 bg-slate-deep/30 border-b border-slate-border/30 mono text-[11px] text-slate-muted uppercase tracking-[0.3em] font-bold italic">
+                    <span>Timestamp</span>
+                    <span>Intelligence Subject</span>
+                    <span>Classification</span>
+                    <span>Sector / Flow</span>
+                    <span class="text-right">Access</span>
+                </div>
+
+                <div class="divide-y divide-slate-border/10">
+                    <!-- Article 1 -->
+                    <div class="group grid grid-cols-1 lg:grid-cols-[160px_1fr_200px_160px_100px] gap-8 px-12 py-12 hover:bg-slate-deep/20 transition-all items-center relative">
+                        <div class="mono text-[12px] text-slate-muted italic">TBD_2025</div>
+                        <div>
+                            <h3 class="text-3xl font-black text-off-white group-hover:text-tactical-blue transition-colors mb-4 uppercase italic tracking-tighter leading-tight">Signal Detection & Conflict Heatmaps</h3>
+                            <div class="flex gap-6">
+                                <span class="mono text-[10px] text-slate-muted uppercase tracking-widest flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tactical-blue"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    Vol: 8m Analysis
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hidden lg:block">
+                            <span class="px-4 py-2 bg-tactical-blue/5 border border-tactical-blue/30 mono text-[10px] text-tactical-blue uppercase tracking-[0.2em] font-bold">Strategic_OSINT</span>
+                        </div>
+                        <div class="hidden lg:block mono text-[11px] text-slate-muted uppercase tracking-widest">Analysis</div>
+                        <div class="flex justify-end">
+                            <a href="#" class="p-4 bg-slate-border/10 border border-slate-border/30 hover:border-tactical-blue text-slate-muted hover:text-tactical-blue transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-16 bg-slate-deep/20 border-t border-slate-border/20 flex flex-col md:flex-row justify-between items-center gap-12">
+                    <div class="flex items-center gap-10">
+                        <div class="w-16 h-16 bg-midnight border border-slate-border/50 rounded-sm flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tactical-blue"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        </div>
+                        <div>
+                            <div class="text-[12px] mono text-off-white uppercase tracking-[0.3em] mb-2 font-bold italic">Intelligence Registry Access</div>
+                            <div class="text-[10px] mono text-slate-muted uppercase tracking-widest max-w-md leading-relaxed">
+                                Export complete technical assessed dataset including regional conflict heatmaps and supply chain vulnerability logs.
+                            </div>
+                        </div>
+                    </div>
+                    <button class="px-12 py-5 bg-tactical-blue text-white mono text-[11px] uppercase tracking-[0.4em] font-bold hover:bg-tactical-blue/90 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                        REQUEST FULL ARCHIVE
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dossier Section -->
+        <section id="dossier" class="py-48 px-10 bg-slate-deep/5 border-t border-slate-border/20 relative">
+            <div class="max-w-[1500px] mx-auto border border-slate-border/30 bg-midnight p-24 md:p-32 flex flex-col items-center text-center gap-16 relative overflow-hidden shadow-2xl">
+                <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+                   <div class="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+                </div>
+
+                <div class="max-w-4xl relative z-10">
+                   <div class="flex items-center justify-center gap-6 mb-12">
+                     <div class="w-10 h-px bg-tactical-blue"></div>
+                     <span class="mono text-[11px] text-tactical-blue uppercase tracking-[0.6em] font-bold">Personnel Archive</span>
+                     <div class="w-10 h-px bg-tactical-blue"></div>
+                   </div>
+                   <h3 class="text-[80px] md:text-[110px] font-black tracking-tighter text-off-white mb-10 uppercase italic leading-none">
+                     Professional <span class="text-tactical-blue">Dossier</span>
+                   </h3>
+                   <p class="text-slate-muted text-2xl leading-relaxed italic font-serif max-w-2xl mx-auto border-y border-slate-border/20 py-12">
+                     Download the complete strategic profile encompassing technical assessments, regional specialization matrices, and full career trajectory.
+                   </p>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-10 relative z-10">
+                    <a href="https://example.com/resume-dossier.pdf" target="_blank" class="bg-tactical-blue text-white h-20 px-20 flex items-center justify-center font-bold uppercase tracking-[0.4em] hover:bg-tactical-blue/90 transition-all rounded-sm text-[11px] shadow-[0_0_40px_rgba(59,130,246,0.3)] min-w-[300px]">
+                        Download Archive
+                    </a>
+                    <button class="bg-midnight border border-slate-border h-20 px-20 flex items-center justify-center font-bold uppercase tracking-[0.4em] hover:border-tactical-blue transition-all rounded-sm text-[11px] text-off-white min-w-[300px]">
+                        Access Request
+                    </button>
+                </div>
+
+                <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-6 mono text-[10px] text-slate-muted/50 uppercase tracking-[0.5em]">
+                    <div class="w-2.5 h-2.5 rounded-full bg-alert-amber animate-pulse"></div>
+                    Secure Data Node Ready
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-24 px-10 border-t border-slate-border/10 bg-midnight">
+        <div class="max-w-[1800px] mx-auto flex flex-col md:flex-row justify-between items-center gap-12 mono text-[10px] text-slate-muted uppercase tracking-[0.3em]">
+            <div>© 2024 OPERATIONAL INTELLIGENCE // D. PALIWAL</div>
+            <div class="flex gap-12">
+                <a href="#" class="hover:text-tactical-blue transition-colors">OSINT FRAMEWORK</a>
+                <a href="#" class="hover:text-tactical-blue transition-colors">SECURITY CLEARANCE</a>
+                <a href="#" class="hover:text-tactical-blue transition-colors">PRIVACY_ACT</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-px bg-slate-border/50"></div>
+                <span>ICD-203 COMPLIANT</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function updateZulu() {
+            try {
+                const now = new Date();
+                const time = now.toISOString().split('T')[1].split('.')[0] + ' ZULU';
+                const clock = document.getElementById('zulu-clock');
+                if (clock) {
+                    clock.innerText = time;
+                }
+            } catch (e) {
+                console.error("ZULU update failed", e);
+            }
+        }
+        setInterval(updateZulu, 1000);
+        updateZulu();
+
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
